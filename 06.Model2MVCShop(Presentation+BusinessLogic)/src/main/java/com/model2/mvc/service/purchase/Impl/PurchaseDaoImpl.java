@@ -46,6 +46,10 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	public void updateTranCode(Purchase purchase) throws Exception {
 		sqlSession.update("PurchaseMapper.updateTranCode",purchase);
 	}
+	@Override
+	public int getTotalCount(Search search) throws Exception {
+		return sqlSession.selectOne("PurchaseMapper.getTotalCount",search);
+	}
 	
 	
 	

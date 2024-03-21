@@ -8,13 +8,14 @@
  	
  	
 	<resultMap id="productSelectMap" type="product">
-		<result property="prodNo" 			column="prod_no" 						jdbcType="NUMERIC"/>
+		<result property="prodNo" 			column="prod_no" 					jdbcType="NUMERIC"/>
 		<result property="prodName"		column="prod_name" 				jdbcType="VARCHAR" />
-		<result property="prodDetail" 		column="prod_detail" 					jdbcType="VARCHAR" />
+		<result property="prodDetail" 		column="prod_detail" 				jdbcType="VARCHAR" />
 		<result property="manuDate" 		column="manufacture_day" 		jdbcType="VARCHAR" />
-		<result property="price" 				column="price" 							jdbcType="NUMERIC" />
-		<result property="fileName"	 		column="image_file" 					jdbcType="VARCHAR" />
+		<result property="price" 				column="price" 						jdbcType="NUMERIC" />
+		<result property="fileName"	 		column="image_file" 				jdbcType="VARCHAR" />
 		<result property="regDate" 			column="reg_date" 					jdbcType="DATE" />
+		<result property="proTranCode"	column="tran_status_code" 		jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<insert id="addProduct" parameterType="product">
@@ -31,7 +32,7 @@
 	</select>
 	
 	<select id="getProductList" parameterType="search" resultMap="productSelectMap">
-		SELECT *
+		SELECT p.* , NVL(t.tran_status_code, 1) tran_status_code
 		FROM ( SELECT inner_table.* ,ROWNUM AS row_seq
 						FROM  ( SELECT prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date
 										FROM product
@@ -49,8 +50,9 @@
 											</if>
 										</where>
 										) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
+						WHERE ROWNUM &lt;= #{endRowNum} ) p, transaction t
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+		AND t.prod_no(+) = p.prod_no
 	</select>
 	
 	<update id="updateProduct" parameterType="product" >
@@ -79,6 +81,8 @@
 										</where>
 										) countTable
 	</select>
+	
+	
 	
 	
 	

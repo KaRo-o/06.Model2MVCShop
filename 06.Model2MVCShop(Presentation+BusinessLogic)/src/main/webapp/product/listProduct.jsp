@@ -174,8 +174,15 @@ function fncGetUserList(currentPage){
 					<td></td>
 					<td>
 					<c:choose>
-						<c:when test='${list.proTranCode.equals("1")}'>판매중</c:when>
-						<c:when test='${list.proTranCode.trim().equals("2")}'>구매완료</c:when>
+						<c:when test='${list.proTranCode.trim().equals("1") || list.proTranCode == null}'>판매중</c:when>
+						<c:when test='${list.proTranCode.trim().equals("2")}'>
+							판매완료
+							<c:if test='${param.menu.equals("manage") }'>
+								<a href="/updateTranCode.do?prodNo=${list.prodNo}&tranCode=3">
+								(배송시작)
+								</a>
+							</c:if>
+						</c:when>
 						<c:when test='${list.proTranCode.trim().equals("3")}'>배송중</c:when>
 						<c:when test='${list.proTranCode.trim().equals("4")}'>배송완료</c:when>
 					</c:choose>

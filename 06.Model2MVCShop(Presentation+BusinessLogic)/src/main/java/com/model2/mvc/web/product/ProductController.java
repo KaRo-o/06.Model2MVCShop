@@ -27,6 +27,7 @@ public class ProductController {
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
 	
+	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	

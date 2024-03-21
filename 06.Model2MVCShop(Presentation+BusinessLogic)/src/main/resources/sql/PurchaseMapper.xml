@@ -22,8 +22,8 @@
 		
 		<!-- <association property="buyer" javaType="user" column="buyer_id" resultMap="userSelectMap" /> -->
 		<association property="buyer" javaType="user" column="buyer_id" select="UserMapper.getUser" />
-		<association property="purchaseProd" javaType="product" column="prod_no" resultMap="productSelectMap" /> 
-		<!-- <association property="purchaseProd" javaType="product" column="prod_no" select="ProductMapper.getProduct" /> -->
+		<!-- <association property="purchaseProd" javaType="product" column="prod_no" resultMap="productSelectMap" /> --> 
+		<association property="purchaseProd" javaType="product" column="prod_no" select="ProductMapper.getProduct" />
 		     
 	</resultMap>
 	
@@ -98,7 +98,11 @@
 		WHERE tran_no = ${tranNo}
 	</update>
 	
-	
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT COUNT(*)
+		FROM transaction
+		WHERE buyer_id = #{userId}
+	</select>
 	
 	 
 </mapper>

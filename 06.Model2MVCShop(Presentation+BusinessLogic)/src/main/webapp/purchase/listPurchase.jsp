@@ -94,7 +94,7 @@ function fncGetUserList(currentPage){
 		</td>
 		<td></td>
 		<td align="left">
-			<a href="/getUser.do?userId=${list.buyer.getUserId()}">${list.buyer.getUserId()}</a>
+			<a href="/getUser.do?userId=${list.buyer.userId}">${list.buyer.userId}</a>
 		</td>
 		<td></td>
 		<td align="left">${list.receiverName}</td>
@@ -106,7 +106,7 @@ function fncGetUserList(currentPage){
 		<td></td>
 		<td>
 			<c:choose>
-				<c:when test='${list.tranCode.equals("1")}'>판매중</c:when>
+				<c:when test='${list.tranCode.trim().equals("1")}'>판매중</c:when>
 				<c:when test='${list.tranCode.trim().equals("2")}'>구매완료</c:when>
 				<c:when test='${list.tranCode.trim().equals("3")}'>배송중</c:when>
 				<c:when test='${list.tranCode.trim().equals("4")}'>배송완료</c:when>
@@ -116,10 +116,10 @@ function fncGetUserList(currentPage){
 		
 		<td>
 			<c:if test='${list.tranCode.trim().equals("2")} && ${param.menu.equals("manage")} '>
-				<a href="/updateTranCode.do?tranNo=${list.tranNo}&tranCode=2">배송시작</a>
+				<a href="/updateTranCode.do?tranNo=${list.tranNo}&tranCode=3">배송시작</a>
 			</c:if>
 		 	<c:if test='${list.tranCode.trim().equals("3")}' >
-				<a href="/updateTranCode.do?tranNo=${list.tranNo}&tranCode=3">물건도착</a>
+				<a href="/updateTranCode.do?tranNo=${list.tranNo}&tranCode=4">물건도착</a>
 			</c:if>
 		</td>
 		<td></td>

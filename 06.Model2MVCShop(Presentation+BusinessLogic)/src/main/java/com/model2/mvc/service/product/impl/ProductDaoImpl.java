@@ -50,6 +50,7 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectOne("ProductMapper.getTotalCount",search);
 	}
 
+	
 
 	
 }
