@@ -149,9 +149,21 @@ public class PurchaseController {
 		
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 		purchase.setTranCode(tranCode);
+		purchaseService.updateTranCode(purchase);
 		
+		return "redirect:/listPurchase.do";
+	}
+	
+	@RequestMapping("/updateTranCodeByProd.do")
+	public String updateTranCodeByProd(@RequestParam("tranCode") String tranCode
+											,@RequestParam("tranNo") int tranNo
+											) throws Exception{
 		
-		return "reddirect:/listPurchase.do";
+		Purchase purchase = purchaseService.getPurchase(tranNo);
+		purchase.setTranCode(tranCode);
+		purchaseService.updateTranCode(purchase);
+		
+		return "forward:/listProduct.do?menu=manage";
 	}
 	
 	

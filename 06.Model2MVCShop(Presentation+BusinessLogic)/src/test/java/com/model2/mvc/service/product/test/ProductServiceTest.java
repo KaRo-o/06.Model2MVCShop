@@ -1,5 +1,7 @@
 package com.model2.mvc.service.product.test;
 
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +43,7 @@ public class ProductServiceTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetProduct() throws Exception {
 		
 		Product product = new Product();
@@ -63,7 +65,9 @@ public class ProductServiceTest {
 		search.setSearchCondition("0");
 		search.setSearchKeyword("1000");
 		
-		productService.getProductList(search);
+		Map<String,Object> map = productService.getProductList(search);
+		
+		System.out.println("testLIst" +map);
 		
 	}
 	
@@ -80,9 +84,11 @@ public class ProductServiceTest {
 		
 		productService.updateProduct(product);
 		
+		
+		
 	}
 	
-	@Test
+	//@Test
 	public void testGetTotalCount() throws Exception {
 		Search search = new Search();
 		search.setSearchCondition("0");

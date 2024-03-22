@@ -178,7 +178,7 @@ function fncGetUserList(currentPage){
 						<c:when test='${list.proTranCode.trim().equals("2")}'>
 							판매완료
 							<c:if test='${param.menu.equals("manage") }'>
-								<a href="/updateTranCode.do?prodNo=${list.prodNo}&tranCode=3">
+								<a href="/updateTranCodeByProd.do?tranNo=${list.proTranNo}&tranCode=3&menu=manage">
 								(배송시작)
 								</a>
 							</c:if>

@@ -16,6 +16,7 @@
 		<result property="fileName"	 		column="image_file" 				jdbcType="VARCHAR" />
 		<result property="regDate" 			column="reg_date" 					jdbcType="DATE" />
 		<result property="proTranCode"	column="tran_status_code" 		jdbcType="VARCHAR" />
+		<result property="proTranNo"		column="tran_no"					jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<insert id="addProduct" parameterType="product">
@@ -32,7 +33,7 @@
 	</select>
 	
 	<select id="getProductList" parameterType="search" resultMap="productSelectMap">
-		SELECT p.* , NVL(t.tran_status_code, 1) tran_status_code
+		SELECT p.* , NVL(t.tran_status_code, 1) tran_status_code , tran_no
 		FROM ( SELECT inner_table.* ,ROWNUM AS row_seq
 						FROM  ( SELECT prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date
 										FROM product
